@@ -10,5 +10,5 @@ For more information see [README]
 	[OF-DPA]: <https://github.com/Broadcom-Switch/of-dpa>
 	[p4factory]: <https://github.com/p4lang/p4factory>
 	[p4 switch]: <https://github.com/p4lang/switch>
-	[README]: <https://github.com/andxeg/p4-program/info/README.txt>
+	[README]: <https://github.com/andxeg/p4-program/blob/master/info/README.txt>
 
