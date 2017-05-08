@@ -1,0 +1,7 @@
+/build
+/.*_ts
+/dependmodules.x
+/ofdpa.mk
+/*.pcap
+/ofdpa
+/tests/pd_thrift
