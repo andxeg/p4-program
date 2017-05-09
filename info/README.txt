@@ -1,3 +1,5 @@
+
+======================================ЗАДАНИЕ==================================
 Задание можно посмотреть по ссылке -> http://www.alexander-shalimov.com/advsdn17
 
 Комментарии от Саши Шалимова:
@@ -112,3 +114,57 @@ PCP  - Priority Code Point. Field in VLAN label. Identify class of service.
 14.	
 
 
+======================================MININET==================================
+1.	Если возникнут ошибки при работе с mininet, то выполнить следующие команды:
+	a.	sudo mn -c
+	b.	sudo killall behavioral-model
+	c.	redis-cli FLUSHALL
+
+
+====================================РЕАЛИЗАЦИЯ=================================
+
+1. 	tunnel_id - Со слов Вали. Некий аналог метадаты, который сопоставляется
+	некоторому набору входных/выходных портов.
+
+2.	LMEP_ID - ????
+
+Ingress packets always have an associated Tunnel Id metadata value and may have an associated
+LMEP_Id. Packets that enter the data plane from physical ports always have a zero Tunnel. Packets from
+tunnel logical ports require a positive, non-zero Tunnel Id value to be assigned in order to identify the
+tenant forwarding domain. The Tunnel Id logically accompanies the packet through the pipeline so that
+when tenant packets are output, the Tunnel Id is supplied to the egress logical port.
+
+3.	Double tagging -> https://en.wikipedia.org/wiki/IEEE_802.1Q#Double_tagging
+
+4.	Tunnel_id можно проставлять на этапе парсинга в ingress_metadata. Потом в таблицах
+	можно будет матчить по полю ingress_metadata.tunnel_id. Аналогично для LMEP_ID.
+	На этапе парсинга можно использовать standard_metadata.
+
+	Но можно сделать дополнительную таблицу в самом начале: port_mapping, и в ней
+	уже ставить соответствие между портои и tunnel_id.
+
+5.	Аналогии.
+	table 	<---> class в ООП
+	reads 	<---> параметры конструктора при создании экземпляра класса
+	actions <---> методы класса
+
+	В таблице P4-коммутатора будут стоять правила вида: "add_entry <table_name> <table_reads_params> <action_name> <action_params>"
+
+
+6.	При написании опираюсь на https://github.com/p4lang/papers/blob/master/sosr15/DC.p4/includes/parser.p4
+
+7.	ВАЖНО!!! https://github.com/p4lang/behavioral-model/blob/master/docs/JSON_format.md
+	В самом низу есть объяснение ternary.
+
+8.	OpenFlow actions types:
+	a.	GOTO. Goto to the table.
+	b.	APPLY.
+		i.	SET_FIELD - изменить поле
+	c.	CLEAR.
+	d.	WRITE Action. 
+
+
+
+Вопросы:
+1) Кто поставит VID метку. В описании json VID уже есть на нетегированном  трафике.
+2) Зачем таблицы VLAN 1?

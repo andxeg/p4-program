@@ -20,15 +20,6 @@ header_type vlan_tag_t {
     }
 }
 
-header_type mpls_t {
-    fields {
-        label : 20;
-        exp : 3;
-        bos : 1;
-        ttl : 8;
-    }
-}
-
 header_type ipv4_t {
     fields {
         version : 4;
@@ -46,7 +37,6 @@ header_type ipv4_t {
     }
 }
 
-
 header_type ipv6_t {
     fields {
         version : 4;
@@ -57,13 +47,6 @@ header_type ipv6_t {
         hopLimit : 8;
         srcAddr : 128;
         dstAddr : 128;
-    }
-}
-
-header_type icmp_t {
-    fields {
-        typeCode : 16;
-        hdrChecksum : 16;
     }
 }
 

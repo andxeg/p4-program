@@ -1,0 +1,28 @@
+{
+  "identifiers": [
+    {
+      "var": "<overlay_tunnel_id>",
+      "range": "0..2**16-1",
+      "doc": [
+        "Different ranges for different tunnel types.",
+        "Non-tunnel packets from physical ports always have tunnel_id zero."
+      ]
+    },
+    {
+      "var": "<mpls_tunnel_id>",
+      "range": "2**16..2**17-1",
+      "doc": [
+        "Different ranges for different tunnel types.",
+        "Non-tunnel packets from physical ports always have tunnel_id zero."
+      ]
+    },
+    {
+      "var": "<lmep_id>",
+      "range": "1..(2**32-1)",
+      "doc": [
+        "Lmep id provides connection between OpenFlow and OF-Config domains."
+      ]
+    }
+
+  ]
+}
