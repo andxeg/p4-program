@@ -34,6 +34,9 @@ header_type intrinsic_metadata_t {
         bridging_hit             : 1;
         unicast_overlay_hit      : 1;
         dlf_vlan_hit             : 1;
+
+        policy_acl_ipv4_vlan_hit : 1;
+        policy_acl_ipv6_vlan_hit : 1;
     }
 }
 

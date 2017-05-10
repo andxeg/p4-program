@@ -23,10 +23,10 @@ action validate_unicast_overlay() {
     modify_field(intrinsic_metadata.unicast_overlay_hit, 1);
 }
 
-table unicast_overlay() {
+table unicast_overlay {
     reads {
         ethernet.dstAddr mask 0x010000000000 : exact;
-        ingress_metadate.tunnel_id           : exact;
+        ingress_metadata.tunnel_id           : exact;
     }
     actions {
         validate_unicast_overlay;
@@ -56,8 +56,8 @@ table bridging {
 
 
 control process_bridging {
-    apply(unicast_overlay)
-    apply(dlf_vlan)
+    apply(unicast_overlay);
+    apply(dlf_vlan);
     apply(bridging);
 
     if (intrinsic_metadata.bridging_hit == 1) {
