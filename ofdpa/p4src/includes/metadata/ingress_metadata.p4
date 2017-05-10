@@ -1,26 +1,5 @@
 
-
-header_type ingress_metadata_t {
-    fields {
-        ingress_port : 9;                      /* input physical port */
-        ifindex : IFINDEX_BIT_WIDTH;           /* input interface index */
-        egress_ifindex : IFINDEX_BIT_WIDTH;    /* egress interface index */
-        port_type : 2;                         /* ingress port type */
-
-        outer_bd : BD_BIT_WIDTH;               /* outer BD */
-        bd : BD_BIT_WIDTH;                     /* BD */
-
-        drop_flag : 1;                         /* if set, drop the packet */
-        drop_reason : 8;                       /* drop reason */
-        control_frame: 1;                      /* control frame */
-        bypass_lookups : 16;                   /* list of lookups to skip */
-        sflow_take_sample : 32 (saturating);
-    }
-}
-
-
-
-header_type ingress_metadata_t {
+header_type large_ingress_metadata_t {
     fields {
         lkp_pkt_type : 3;
         lkp_mac_sa : 48;
@@ -42,7 +21,6 @@ header_type ingress_metadata_t {
 
         l3_length : 16;                        /* l3 length */
 
-        ifindex : IFINDEX_BIT_WIDTH;           /* input interface index - MSB bit lag*/
         lif : 16;                              /* logical interface */
         vrf : VRF_BIT_WIDTH;                   /* VRF */
 
@@ -75,7 +53,6 @@ header_type ingress_metadata_t {
         bd_label : 16;                         /* bd label for acls */
 
         l2_src_miss : 1;                       /* l2 source miss */
-        l2_src_move : IFINDEX_BIT_WIDTH;       /* l2 source interface mis-match */
         acl_deny : 1;                          /* ifacl/vacl deny action */
         racl_deny : 1;                         /* racl deny action */
         l2_redirect : 1;                       /* l2 redirect action */
@@ -100,7 +77,6 @@ header_type ingress_metadata_t {
 
         ttl : 8;                               /* update ttl */
 
-        egress_ifindex : IFINDEX_BIT_WIDTH;    /* egress interface index */
         egress_bd : BD_BIT_WIDTH;              /* egress BD */
 
         ingress_bypass : 1;                    /* skip the entire ingress pipeline */
@@ -121,5 +97,8 @@ header_type my_ingress_metadata_t {
         tunnel_id        : 17;            /* SEE includes/readme.json */
         lmep_id          : 32;            /* SEE includes/readme.json */
         vrf              : VRF_BIT_WIDTH; /* VRF */
+        lkp_l4_sport     : 16;
+        lkp_l4_dport     : 16;
     }
 }
+

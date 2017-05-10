@@ -20,6 +20,6 @@ header_type egress_metadata_t {
 
 header_type my_egress_metadata_t {
     fields {
-
+        test_field : 1;
     }
 }

@@ -1,5 +1,34 @@
-// This is P4 sample source for ofdpa
-// Fill in these files with your P4 code
+/*****************************************************************************/
+/*                           OF-DPA pipeline of P4                           */
+/* This program implements only part of OF-DPA. OF-DPA pipeline is vey       */ 
+/* branchy and therefore all program execution was done using construction   */
+/* with keyword 'control'(it is a like function in programming language).    */
+/* Some tables were changed, because P4 does not allow flexibility in tables */
+/* mathing definition. Construction 'reads' strictly fix the presence of     */
+/* packet or metadata fields. All cheching you need do in control function   */
+/* using if-else construction or construction like case:                     */
+/*                                                                           */
+/*    apply(table1) {                                                        */
+/*        table1_action1 {                                                   */
+/*            some apply-constructions                                       */
+/*        }                                                                  */
+/*        table1_action2 {                                                   */
+/*            some apply-constructions                                       */
+/*        }                                                                  */
+/*    }                                                                      */
+/*                                                                           */
+/*    or                                                                     */
+/*                                                                           */
+/*    apply(table1) {                                                        */
+/*        hit {                                                              */
+/*            some apply-constructions                                       */
+/*        }                                                                  */
+/*        miss {                                                             */
+/*            some apply-constructions                                       */
+/*        }                                                                  */
+/*    }                                                                      */
+/*****************************************************************************/
+
 
 #include "includes/constants.h"
 #include "includes/p4_table_size.h"
@@ -27,37 +56,11 @@ metadata my_egress_metadata_t egress_metadata;
 /* Null actions, nop() and on_miss() */
 #include "includes/null_actions.p4"
 
+#include "includes/p4features.h"
+
 control ingress {
-    apply(ingress_port) {
-        hit {
-            process_vlan();
-        }
-        miss {
-            apply(policy_acl);
-        }
-    }
-
-    // Policy ACL is a penultimate table;
-    // L2 Interface is the last table. It is a 
-    // group table.
-
+    process_ingress_port();
 }
-
-
-control process_vlan() {
-    apply(vlan) {
-        hit {
-            
-        }
-        miss {
-            // clear actions. HOW???
-            apply(policy_acl);
-        }
-    }
-}
-
-
-
 
 
 control egress {

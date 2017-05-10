@@ -4,8 +4,10 @@
 // This parses an ethernet header
 
 parser start {
-    set_metadata(ingress_metadata.tunnel_id, 0);
-    set_metadata(ingress_metadata.lmep_id, 0);
+    #ifdef INGRESS_PORT_MAPPING_DISABLE 
+        set_metadata(ingress_metadata.tunnel_id, 0);
+        set_metadata(ingress_metadata.lmep_id, 0);
+    #endif
     return parse_ethernet;
 }
 
@@ -49,6 +51,31 @@ parser parse_vlan {
     }
 }
 
+// header vlan_tag_t vlan_inner;
+// header vlan_tag_t vlan_outer;
+
+// parser parse_vlan {
+//     extract(vlan_outer);
+//     return select(latest.etherType) {
+//         PARSE_ETHERTYPE_MINUS_VLAN;
+//     }
+// }
+
+// parser parse_qinq {
+//     extract(vlan_outer);
+//     return select(latest.etherType) {
+//         ETHERTYPE_VLAN : parse_qinq_vlan;
+//         default : ingress;
+//     }
+// }
+
+// parser parse_qinq_vlan {
+//     extract(vlan_inner);
+//     return select(latest.etherType) {
+//         PARSE_ETHERTYPE_MINUS_VLAN;
+//     }
+// }
+
 
 #define IP_PROTOCOLS_IPV4              4
 #define IP_PROTOCOLS_TCP               6
@@ -91,7 +118,6 @@ calculated_field ipv4.hdrChecksum  {
 
 parser parse_ipv4 {
     extract(ipv4);
-    set_metadata(ingress_metadata.ipv4_dstaddr_24b, latest.dstAddr);
     return select(latest.fragOffset, latest.ihl, latest.protocol) {
         IP_PROTOCOLS_IPHL_TCP : parse_tcp;
         IP_PROTOCOLS_IPHL_UDP : parse_udp;

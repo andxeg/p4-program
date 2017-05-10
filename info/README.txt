@@ -158,13 +158,49 @@ when tenant packets are output, the Tunnel Id is supplied to the egress logical 
 
 8.	OpenFlow actions types:
 	a.	GOTO. Goto to the table.
-	b.	APPLY.
+	b.	APPLY - применить все накопившиеся правила. Обычно в стеке правил есть много
+		SET_FIELD(правила, которые меняют значения пакета). Правил с переходами
+		(OutputAction and Goto GROUP Table) не больше одного.
 		i.	SET_FIELD - изменить поле
 	c.	CLEAR.
-	d.	WRITE Action. 
+	d.	WRITE Action - записать правило. Обычно записывают OutputAction на порт
+		или Goto GROUP Table.
 
 
 
 Вопросы:
-1) Кто поставит VID метку. В описании json VID уже есть на нетегированном  трафике.
-2) Зачем таблицы VLAN 1?
+1) 	Кто поставит VID метку. В описании json VID уже есть на нетегированном  трафике. Никто, будет miss.
+2) 	Зачем таблицы VLAN 1? - pipeline криво написан
+3) 	Проверять на valid нужно не в таблице, а до входа в нее. Это касается таблицы VLAN.
+4)	Чем отличаются следующие записи:
+	{
+	  "field": "VLAN_VID ",
+	  "value": "<vid>|0x1000",
+	  "match_type": "exact"
+	}
+
+    {
+      "field": "VLAN_VID ",
+      "value": "0x1000",
+      "match_type": "mask",
+      "mask": "0x1000"
+    }
+
+
+
+    0x1000 - это выцепление VLAN метки. Если посмотреть на VLAN заголовок, то становится
+    понятно: Сначала идет 4 бит, потом VID, отсюда 0x1000.
+    header_type vlan_tag_t {
+    fields {
+        pcp : 3;
+        cfi : 1;
+        vid : 12;
+        etherType : 16;
+    }
+}
+
+
+5)	Как делать clear actions - никак
+6)	Таблица VLAN. VLAN Assignment - Untagged. VLAN ID == 0. Если метки вообще нет? Если нет, то будет miss.
+
+
