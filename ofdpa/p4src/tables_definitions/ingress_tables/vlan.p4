@@ -5,16 +5,6 @@
 /*****************************************************************************/
 
 
-header_type vlan_tag_t {
-    fields {
-        pcp : 3;
-        cfi : 1;
-        vid : 12;
-        etherType : 16;
-    }
-}
-
-
 action modify_vlan_tag(vid) {
     modify_field(vlan_tag_[0].vid, vid);
     modify_field(intrinsic_metadata.vlan_modify_vlan_tag, 1);
@@ -78,7 +68,7 @@ control process_vlan {
             // If label was popped.
             process_termination_mac();
         } else if (intrinsic_metadata.vlan_modify_vlan_tag == 1 or 
-                   intrinsic_metadata.vlan_pass) {
+                   intrinsic_metadata.vlan_pass == 1) {
             // If label was modified
             // If I want to add new tag to packet
             // It s required a new table, because Vlan 1 work with vlan_tag_[1]

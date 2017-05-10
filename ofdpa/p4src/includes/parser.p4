@@ -1,7 +1,7 @@
-// Template parser.p4 file for ofdpa
-// Edit this file as needed for your P4 program
-
-// This parses an ethernet header
+/*****************************************************************************/
+/*                              Packet Parser                                */
+/* See only Ethernet, VLAN, QinQ, IPv4, IPv6, TCP, UDP                       */
+/*****************************************************************************/
 
 parser start {
     #ifdef INGRESS_PORT_MAPPING_DISABLE 
@@ -13,15 +13,28 @@ parser start {
     set_metadata(intrinsic_metadata.ingress_port_hit, 0);
     set_metadata(intrinsic_metadata.ingress_port_set_vrf, 0);
     set_metadata(intrinsic_metadata.ingress_port_not_set_vrf, 0);
+
     set_metadata(intrinsic_metadata.vlan_modify_vlan_tag, 0);
     set_metadata(intrinsic_metadata.vlan_pop_vlan_tag, 0);
-    
+    set_metadata(intrinsic_metadata.vlan_pass, 0);
 
+    set_metadata(intrinsic_metadata.vlan_1_hit, 0);
+    set_metadata(intrinsic_metadata.vlan_1_modify_vlan_1_tag, 0);
+    set_metadata(intrinsic_metadata.vlan_1_pop_vlan_1_tag, 0);
+    
+    set_metadata(intrinsic_metadata.vlan_2_hit, 0);
+
+    set_metadata(intrinsic_metadata.termination_mac_hit, 0);
+
+    set_metadata(intrinsic_metadata.mask_multicast_IPv4, 0);
+    set_metadata(intrinsic_metadata.mask_multicast_IPv6, 0);
+    
     return parse_ethernet;
 }
 
 
 #define ETHERTYPE_VLAN         0x8100, 0x9100, 0x9200, 0x9300
+#define ETHERTYPE_ONE_VLAN     0x8100
 #define ETHERTYPE_QINQ         0x9100
 #define ETHERTYPE_IPV4         0x0800
 #define ETHERTYPE_IPV6         0x86dd

@@ -1,7 +1,6 @@
-// Template headers.p4 file for ofdpa
-// Edit this file as needed for your P4 program
-
-// Here's an ethernet header to get started.
+/*****************************************************************************/
+/*                                    Headers                                */
+/*****************************************************************************/
 
 header_type ethernet_t {
     fields {

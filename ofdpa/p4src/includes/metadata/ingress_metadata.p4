@@ -94,11 +94,13 @@ header_type large_ingress_metadata_t {
 
 header_type my_ingress_metadata_t {
     fields {
-        tunnel_id        : 17;            /* SEE includes/readme.json */
-        lmep_id          : 32;            /* SEE includes/readme.json */
-        vrf              : VRF_BIT_WIDTH; /* VRF */
-        lkp_l4_sport     : 16;
-        lkp_l4_dport     : 16;
+        tunnel_id           : 17;            /* SEE includes/readme.json */
+        lmep_id             : 32;            /* SEE includes/readme.json */
+        vrf                 : VRF_BIT_WIDTH; /* VRF */
+        lkp_l4_sport        : 16;
+        lkp_l4_dport        : 16;
+        mask_multicast_IPv4 : 48;            /* mask eth_dst with ff-ff-ff-80-00-00 for IPv4 multicast */
+        mask_multicast_IPv6 : 48;            /* mask eth_dst with ff-ff-00-00-00-00 for IPv6 multicast */
     }
 }
 

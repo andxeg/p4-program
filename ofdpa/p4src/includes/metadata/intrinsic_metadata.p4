@@ -1,3 +1,7 @@
+/*****************************************************************************/
+/*                              Intrinsic Metadata                           */
+/*****************************************************************************/
+
 
 header_type intrinsic_metadata_t {
     fields {
@@ -15,7 +19,9 @@ header_type intrinsic_metadata_t {
         vlan_1_pop_vlan_1_tag    : 1;
 
         vlan_2_hit               : 1;
-        
+
+        termination_mac_hit      : 1;
+
             
     }
 }

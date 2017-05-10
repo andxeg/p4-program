@@ -8,6 +8,8 @@
 
 #include "ingress_tables/vlan_1.p4"
 
+#include "ingress_tables/vlan_2.p4"
+
 #include "ingress_tables/termination_mac.p4"
 
 #include "ingress_tables/l3_type.p4"
