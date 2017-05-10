@@ -24,7 +24,16 @@ header_type intrinsic_metadata_t {
 
         l3_type_v4_hit           : 1;
         l3_type_v6_hit           : 1;
-                    
+
+        unicast_routing_ipv4_hit : 1;
+        unicast_routing_ipv6_hit : 1;   
+
+        multicast_routing_ipv4_hit : 1;
+        multicast_routing_ipv6_hit : 1;
+
+        bridging_hit             : 1;
+        unicast_overlay_hit      : 1;
+        dlf_vlan_hit             : 1;
     }
 }
 

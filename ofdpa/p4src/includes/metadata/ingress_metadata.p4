@@ -105,6 +105,7 @@ header_type my_ingress_metadata_t {
         mask_l3_multicast_IPv4 : 32;            /* mask ip_dst with 224.0.0.0 for IPv4 multicast */
         mask_l3_multicast_IPv6 : 32;            /* mask ip_dst ff00:0:0:0:0:0:0:0 for IPv6 multicast */
 
+        mask_l2_for_vlan_cast   : 48;            /* unicast or multicast*/
 
     }
 }

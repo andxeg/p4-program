@@ -10,6 +10,7 @@ parser start {
     #endif
 
 
+    /* Set intrinsic metadata*/
     set_metadata(intrinsic_metadata.ingress_port_hit, 0);
     set_metadata(intrinsic_metadata.ingress_port_set_vrf, 0);
     set_metadata(intrinsic_metadata.ingress_port_not_set_vrf, 0);
@@ -29,13 +30,25 @@ parser start {
     set_metadata(intrinsic_metadata.l3_type_v4_hit, 0);
     set_metadata(intrinsic_metadata.l3_type_v6_hit, 0);
 
+    set_metadata(intrinsic_metadata.unicast_routing_ipv4_hit, 0);
+    set_metadata(intrinsic_metadata.unicast_routing_ipv6_hit, 0);
     
-    
+    set_metadata(intrinsic_metadata.multicast_routing_ipv4_hit, 0);        
+    set_metadata(intrinsic_metadata.multicast_routing_ipv6_hit, 0);
+
+
+    set_metadata(intrinsic_metadata.bridging_hit, 0);
+    set_metadata(intrinsic_metadata.unicast_overlay_hit, 0);
+    set_metadata(intrinsic_metadata.dlf_vlan_hit, 0);
+
+    /* Set ingress metadata*/
     set_metadata(ingress_metadata.mask_l2_multicast_IPv4, 0);
     set_metadata(ingress_metadata.mask_l2_multicast_IPv6, 0);
 
     set_metadata(ingress_metadata.mask_l3_multicast_IPv4, 0);
     set_metadata(ingress_metadata.mask_l3_multicast_IPv6, 0);
+
+    set_metadata(ingress_metadata.mask_l2_for_vlan_cast, 0)
     
     return parse_ethernet;
 }

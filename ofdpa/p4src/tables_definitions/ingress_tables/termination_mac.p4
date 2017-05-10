@@ -15,7 +15,7 @@ table termination_mac {
         standard_metadata.ingress_port  : exact;
         ethernet.etherType              : exact;
         ethernet.dstAddr                : exact;
-        vlan_tag_[0]                    : exact;
+        vlan_tag_[0].vid                : exact;
     }
     actions {
         validate_l2_multicast;
