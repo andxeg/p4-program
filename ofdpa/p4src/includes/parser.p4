@@ -26,8 +26,16 @@ parser start {
 
     set_metadata(intrinsic_metadata.termination_mac_hit, 0);
 
-    set_metadata(intrinsic_metadata.mask_multicast_IPv4, 0);
-    set_metadata(intrinsic_metadata.mask_multicast_IPv6, 0);
+    set_metadata(intrinsic_metadata.l3_type_v4_hit, 0);
+    set_metadata(intrinsic_metadata.l3_type_v6_hit, 0);
+
+    
+    
+    set_metadata(ingress_metadata.mask_l2_multicast_IPv4, 0);
+    set_metadata(ingress_metadata.mask_l2_multicast_IPv6, 0);
+
+    set_metadata(ingress_metadata.mask_l3_multicast_IPv4, 0);
+    set_metadata(ingress_metadata.mask_l3_multicast_IPv6, 0);
     
     return parse_ethernet;
 }

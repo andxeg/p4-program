@@ -22,7 +22,9 @@ header_type intrinsic_metadata_t {
 
         termination_mac_hit      : 1;
 
-            
+        l3_type_v4_hit           : 1;
+        l3_type_v6_hit           : 1;
+                    
     }
 }
 

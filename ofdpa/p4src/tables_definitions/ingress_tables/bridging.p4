@@ -12,5 +12,5 @@ table bridging {
 }
 
 control process_bridging {
-
+    apply(bridging);
 }
