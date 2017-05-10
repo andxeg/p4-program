@@ -5,7 +5,7 @@
 /* with keyword 'control'(it is a like function in programming language).    */
 /* Some tables were changed, because P4 does not allow flexibility in tables */
 /* mathing definition. Construction 'reads' strictly fix the presence of     */
-/* packet or metadata fields. All cheching you need do in control function   */
+/* packet or metadata fields. All checkhing you need do in control function  */
 /* using if-else construction or construction like case:                     */
 /*                                                                           */
 /*    apply(table1) {                                                        */
@@ -41,6 +41,7 @@
 #include "includes/metadata.p4"
 metadata my_ingress_metadata_t ingress_metadata;
 metadata my_egress_metadata_t egress_metadata;
+metadata intrinsic_metadata_t intrinsic_metadata;
 
 
 /* Ingress tables */
@@ -59,7 +60,13 @@ metadata my_egress_metadata_t egress_metadata;
 #include "includes/p4features.h"
 
 control ingress {
-    process_ingress_port();
+    // process_ingress_port();
+
+    if (2 > 1) {
+        apply(ingress_port);
+    } else if (3 > 4) {
+        apply(ingress_port);
+    }
 }
 
 

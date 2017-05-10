@@ -20,10 +20,12 @@
 
 
 action normal_ethernet_set_vrf(vrf) {
+    modify_field(intrinsic_metadata.ingress_port_hit, 1);
     modify_field(ingress_metadata.vrf, vrf);
 }
 
 action normal_ethernet_not_set_vrf() {
+    modify_field(intrinsic_metadata.ingress_port_hit, 1);
 }
 
 table ingress_port {
@@ -33,6 +35,8 @@ table ingress_port {
         ingress_metadata.lmep_id       : exact;        
     }
     actions {
+        // optionaly set VRF
+        
         normal_ethernet_set_vrf;
         normal_ethernet_not_set_vrf;
 
@@ -47,16 +51,16 @@ control process_ingress_port {
     #endif
 
     if (ingress_metadata.tunnel_id == 0 and ingress_metadata.lmep_id == 0) {
-        apply(ingress_port) {
-            hit {
-                process_vlan();
-            }
-            miss {
-                // Policy ACL is a penultimate table;
-                // L2 Interface is the last table 
-                // and it is a group table.
-                process_policy_acl();
-            }
+        apply(ingress_port);
+        if (intrinsic_metadata.ingress_port_hit == 1) {
+            // HIT
+            process_vlan();
+        } else {
+            // MISS
+            // Policy ACL is a penultimate table;
+            // L2 Interface is the last table 
+            // and it is a group table.
+            process_policy_acl();
         }
     } else if (ingress_metadata.tunnel_id != 0 and ingress_metadata.lmep_id == 0) {
         // It is Tunnel overlay flow mod

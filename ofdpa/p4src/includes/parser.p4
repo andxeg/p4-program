@@ -8,11 +8,21 @@ parser start {
         set_metadata(ingress_metadata.tunnel_id, 0);
         set_metadata(ingress_metadata.lmep_id, 0);
     #endif
+
+
+    set_metadata(intrinsic_metadata.ingress_port_hit, 0);
+    set_metadata(intrinsic_metadata.ingress_port_set_vrf, 0);
+    set_metadata(intrinsic_metadata.ingress_port_not_set_vrf, 0);
+    set_metadata(intrinsic_metadata.vlan_modify_vlan_tag, 0);
+    set_metadata(intrinsic_metadata.vlan_pop_vlan_tag, 0);
+    
+
     return parse_ethernet;
 }
 
 
 #define ETHERTYPE_VLAN         0x8100, 0x9100, 0x9200, 0x9300
+#define ETHERTYPE_QINQ         0x9100
 #define ETHERTYPE_IPV4         0x0800
 #define ETHERTYPE_IPV6         0x86dd
 
