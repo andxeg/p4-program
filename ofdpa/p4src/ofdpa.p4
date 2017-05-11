@@ -60,13 +60,7 @@ metadata intrinsic_metadata_t intrinsic_metadata;
 #include "includes/p4features.h"
 
 control ingress {
-    // process_ingress_port();
-
-    if (2 > 1) {
-        apply(ingress_port);
-    } else if (3 > 4) {
-        apply(ingress_port);
-    }
+    process_ingress_port();
 }
 
 

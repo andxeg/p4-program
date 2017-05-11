@@ -64,11 +64,8 @@ table policy_acl_ipv4_vlan {
 
 
 control process_policy_acl {
-    if (ethernet.etherType == 0x0800) {
-        apply(policy_acl_ipv4_vlan);
-    } else if (ethernet.etherType == 0x86dd) {
-        apply(policy_acl_ipv6_vlan);
-    }
+    apply(policy_acl_ipv4_vlan);
+    apply(policy_acl_ipv6_vlan);
 
     if (intrinsic_metadata.policy_acl_ipv4_vlan_hit == 0 and 
         intrinsic_metadata.policy_acl_ipv6_vlan_hit == 0) {
@@ -76,6 +73,7 @@ control process_policy_acl {
         process_l2_interface();
     } else {
         // MISS
+        
     }
 }
 
