@@ -28,23 +28,30 @@
 
 
 ========================================ССЫЛКИ=================================
-P4
+
+---------------------------------ОФИЦИАЛЬНЫЙ_САЙТ_P4---------------------------
 1.	http://p4.org/spec/
 2.	http://p4.org/p4-faq/
 
 
-
+--------------------------------------РЕПОЗИТОРИИ------------------------------
 p4factory -> https://github.com/p4lang/p4factory
 
-Смотреть  нужно tutorials, а не p4factory. Это сказал разраб 18 дней назад -> https://github.com/p4lang/p4factory/issues/190
+Смотреть нужно tutorials, а не p4factory. Это сказал разработчик 18 дней назад -> https://github.com/p4lang/p4factory/issues/190 .
 Чтобы все настроить перед запуском прог из tutorials См. -> https://github.com/p4lang/tutorials/tree/master/SIGCOMM_2015#obtaining-required-software
 
 
-Чтобы версия v1_1 работа, нужно доустановить пакеты для компилятора 'p4c-bm'. Смотри ссылку ->  https://github.com/p4lang/p4c-bm
+Есть старая версия и более новая версия языка P4. Старая (ниже  версии 1.1) есть в p4factory. Новая версия v1.1 есть в tutorials, там 
+другой синтаксис, поэтому нужен P4-компилятор более новый. Чтобы версия v1_1 работа, нужно доустановить пакеты для компилятора 
+'p4c-bm'. Смотри ссылку ->  https://github.com/p4lang/p4c-bm.
 
 
-Со стандартным мининетом в ubuntu 14.04 не работает. Установил мининет так -> https://sdn-lab.com/2014/12/31/setting-up-mininet-2-2-on-ubuntu-12-04-and-14-04/
+НО! Если хочется просто попробовать, то можно использовать и p4factory, так как 
+внутри репозитория есть скрипт, который скачивает все зависимости и все настраивает.
 
+
+Со стандартным мининетом в ubuntu 14.04 не работает. 
+Установил мининет так -> https://sdn-lab.com/2014/12/31/setting-up-mininet-2-2-on-ubuntu-12-04-and-14-04/
 
 
 SEE -> https://www.youtube.com/watch?v=KQ3nSqV9iw8
@@ -202,5 +209,3 @@ when tenant packets are output, the Tunnel Id is supplied to the egress logical 
 
 5)	Как делать clear actions - никак
 6)	Таблица VLAN. VLAN Assignment - Untagged. VLAN ID == 0. Если метки вообще нет? Если нет, то будет miss.
-
-
